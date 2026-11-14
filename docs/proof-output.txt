@@ -1,0 +1,38 @@
+
+> ledgerline@1.0.0 test:proof
+> vitest run tests/ledger.test.ts --reporter=verbose
+
+
+ RUN  v5.1.0 /Users/sumanthkumar/Downloads/a1/ledgerline
+
+stdout | tests/ledger.test.ts > real PostgreSQL ledger proofs > PROOF 1: 100 concurrent debits cannot overdraw or lose an update
+PROOF 1 PASS | 100 concurrent requests | 50 completed | 50 rejected | sender=0 | receiver=10000 | no lost updates
+
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > PROOF 1: 100 concurrent debits cannot overdraw or lose an update 419ms
+stdout | tests/ledger.test.ts > real PostgreSQL ledger proofs > PROOF 2: 10 simultaneous identical keys move money exactly once
+PROOF 2 PASS | 10 same-key requests | 1 transfer | 2 entries | 750 minor units moved exactly once
+
+stdout | tests/ledger.test.ts > real PostgreSQL ledger proofs > PROOF 3: reconciliation snapshots stay balanced during writes and rebuild every balance
+PROOF 3 PASS | 6 consistent snapshots | debits=14000 | credits=14000 | 3 rebuilt balances match | 0 mismatches
+
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > PROOF 2: 10 simultaneous identical keys move money exactly once 36ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > PROOF 3: reconciliation snapshots stay balanced during writes and rebuild every balance 95ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > conflicts on a reused key with a different payload 20ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > persists overdraft failures and returns the original rejection on retry 22ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > reverses with a new journal, preserves the original, and replays safely 25ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > permits exactly one of two concurrent reversal keys 35ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > keeps a failed reversal linked and allows a fresh key after funds return 29ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > runs transfers in opposite directions without deadlocks or balance loss 181ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > finds deliberate cache corruption without silently repairing it 22ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > Postgres rejects a single-sided journal at commit and rolls back the cache 27ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > Postgres rejects a balanced journal with the wrong accounts 27ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > Postgres prevents edits or deletion of audit records 29ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > validates money, headers, currency, IDs, and self-transfers before writing 26ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > creates zero-balance wallets and handles unknown accounts 26ms
+ ✓ tests/ledger.test.ts > real PostgreSQL ledger proofs > does not expose equity as a payment wallet or allow API issuance 20ms
+
+ Test Files  1 passed (1)
+      Tests  16 passed (16)
+   Start at  12:17:43
+   Duration  2.06s (tests 57%, import 39%, transform 4%)
+
